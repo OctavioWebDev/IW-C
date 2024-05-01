@@ -1,38 +1,55 @@
+'use client';
+
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 
 export default function ContactForm() {
-    // Form state handling
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         email: '',
+        phone: '',
         message: ''
     });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const [submitStatus, setSubmitStatus] = useState({
+        message: '',
+        isError: false,
+    });
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = event.target;
         setFormData(prevState => ({
             ...prevState,
             [name]: value
         }));
     };
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setSubmitStatus({ message: '', isError: false });
+
+        emailjs.sendForm(
+            process.env.REACT_APP_EMAILJS_SERVICE_ID || "",
+            process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "",
+            event.currentTarget,
+            process.env.REACT_APP_EMAILJS_USER_ID || ""
+        )
             .then((result) => {
                 console.log('Email successfully sent!', result.text);
+                setSubmitStatus({ message: 'Your request has been sent successfully!', isError: false });
+                setFormData({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    phone: '',
+                    message: ''
+                });
+                event.currentTarget.reset();
             }, (error) => {
                 console.log('Failed to send the email:', error.text);
+                setSubmitStatus({ message: 'Failed to send request. Please try again.', isError: true });
             });
-        // Reset form fields after sending email
-        setFormData({
-            firstName: '',
-            lastName: '',
-            email: '',
-            message: ''
-        });
     };
 
     return (
@@ -49,6 +66,7 @@ export default function ContactForm() {
                         value={formData.firstName}
                         onChange={handleChange}
                         required
+                        placeholder='First Name'
                     />
                 </div>
                 <div className="mb-4">
@@ -61,6 +79,20 @@ export default function ContactForm() {
                         value={formData.lastName}
                         onChange={handleChange}
                         required
+                        placeholder='Last Name'
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="phone" className="block text-white mb-2">Last Name:</label>
+                    <input
+                        type="text"
+                        id="phone"
+                        name="phone"
+                        className="w-full p-2 rounded"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        required
+                        placeholder='Phone Number'
                     />
                 </div>
                 <div className="mb-4">
@@ -80,7 +112,6 @@ export default function ContactForm() {
                     <textarea
                         id="message"
                         name="message"
-                        rows="4"
                         className="w-full p-2 rounded"
                         value={formData.message}
                         onChange={handleChange}
@@ -91,6 +122,12 @@ export default function ContactForm() {
                     Send
                 </button>
             </form>
+
+            {submitStatus.message && (
+                <p className={`mt-4 text-sm ${submitStatus.isError ? 'text-red-500' : 'text-green-500'}`}>
+                    {submitStatus.message}
+                </p>
+            )}
         </div>
     );
 }

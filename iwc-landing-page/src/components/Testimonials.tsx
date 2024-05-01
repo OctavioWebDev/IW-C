@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect } from 'react';
 
 const testimonialsData = [
@@ -29,7 +30,7 @@ export default function Testimonials() {
     <div className="bg-gray-800 text-white p-8">
       <h1 className="text-xl font-bold text-center mb-4">Testimonials</h1>
       <div className="text-center">
-        <p className="text-lg italic">"{testimonialsData[index].quote}"</p>
+        <p className="text-lg italic">{testimonialsData[index].quote}</p>
         <p className="text-sm mt-2">— {testimonialsData[index].author}</p>
       </div>
     </div>

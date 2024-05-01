@@ -1,10 +1,18 @@
+'use client';
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
+// Dynamically import react-leaflet components
+const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import('react-leaflet').then(mod => mod.Marker), { ssr: false });
+const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ssr: false });
+
 export default function Footer() {
-  const position = [51.505, -0.09]; // Example position for the map (London)
+  // Define position as a tuple [latitude, longitude]
+  const position: [number, number] = [51.505, -0.09]; // Example position for the map (London)
 
   return (
     <div className="bg-gray-800 text-white p-4">
@@ -20,7 +28,7 @@ export default function Footer() {
 
         {/* Map */}
         <div>
-          <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ height: '200px', width: '100%' }}>
+          <MapContainer center={position} zoom={13} style={{ height: '200px', width: '100%' }} scrollWheelZoom={false}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
@@ -45,4 +53,5 @@ export default function Footer() {
     </div>
   );
 }
+
 
