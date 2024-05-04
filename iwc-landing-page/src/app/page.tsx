@@ -1,6 +1,6 @@
 'use client';
 
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import MainSection from '../components/MainSection';
 import ContactForm from '../components/ContactForm';
@@ -12,7 +12,7 @@ export const runtime = 'edge';
 export default function Home() {
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <HeroSection />
       <MainSection />
       <Testimonials />

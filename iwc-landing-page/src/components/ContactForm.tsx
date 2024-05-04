@@ -1,10 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import emailjs from 'emailjs-com';
 
 export default function ContactForm() {
-    const [formData, setFormData] = useState({
+    const formRef = useRef<HTMLFormElement | null>(null);
+
+    useEffect(() => {
+        // Initialize EmailJS
+        emailjs.init("gXzVIl4DI-2qHQmWy");
+    }, []);
+
+    const [formState, setFormState] = useState({
         firstName: '',
         lastName: '',
         email: '',
@@ -19,7 +26,7 @@ export default function ContactForm() {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
-        setFormData(prevState => ({
+        setFormState(prevState => ({
             ...prevState,
             [name]: value
         }));
@@ -30,22 +37,26 @@ export default function ContactForm() {
         setSubmitStatus({ message: '', isError: false });
 
         emailjs.sendForm(
-            process.env.REACT_APP_EMAILJS_SERVICE_ID || "",
-            process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "",
+            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+            process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
             event.currentTarget,
-            process.env.REACT_APP_EMAILJS_USER_ID || ""
+            process.env.NEXT_PUBLIC_EMAILJS_USER_ID || ""
         )
             .then((result) => {
                 console.log('Email successfully sent!', result.text);
                 setSubmitStatus({ message: 'Your request has been sent successfully!', isError: false });
-                setFormData({
+                setFormState({
                     firstName: '',
                     lastName: '',
                     email: '',
                     phone: '',
                     message: ''
                 });
-                event.currentTarget.reset();
+
+                if (formRef.current) {
+                    formRef.current.reset();
+                }
+
             }, (error) => {
                 console.log('Failed to send the email:', error.text);
                 setSubmitStatus({ message: 'Failed to send request. Please try again.', isError: true });
@@ -53,7 +64,7 @@ export default function ContactForm() {
     };
 
     return (
-        <div className="bg-gray-800 p-8 rounded-lg">
+        <div className="bg-amber-700 p-8">
             <h1 className="text-white text-2xl mb-4">Contact Us</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -62,8 +73,8 @@ export default function ContactForm() {
                         type="text"
                         id="firstName"
                         name="firstName"
-                        className="w-full p-2 rounded"
-                        value={formData.firstName}
+                        className="w-full p-2 bg-sky-950 opacity-50 border-black rounded"
+                        value={formState.firstName}
                         onChange={handleChange}
                         required
                         placeholder='First Name'
@@ -75,21 +86,21 @@ export default function ContactForm() {
                         type="text"
                         id="lastName"
                         name="lastName"
-                        className="w-full p-2 rounded"
-                        value={formData.lastName}
+                        className="w-full p-2 bg-sky-950 opacity-50 border-black rounded"
+                        value={formState.lastName}
                         onChange={handleChange}
                         required
                         placeholder='Last Name'
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="phone" className="block text-white mb-2">Last Name:</label>
+                    <label htmlFor="phone" className="block text-white mb-2">Phone Number:</label>
                     <input
                         type="text"
                         id="phone"
                         name="phone"
-                        className="w-full p-2 rounded"
-                        value={formData.lastName}
+                        className="w-full p-2 bg-sky-950 opacity-50 border-black rounded"
+                        value={formState.phone}
                         onChange={handleChange}
                         required
                         placeholder='Phone Number'
@@ -101,9 +112,10 @@ export default function ContactForm() {
                         type="email"
                         id="email"
                         name="email"
-                        className="w-full p-2 rounded"
-                        value={formData.email}
+                        className="w-full p-2 bg-sky-950 opacity-50 border-black rounded"
+                        value={formState.email}
                         onChange={handleChange}
+                        placeholder='Email'
                         required
                     />
                 </div>
@@ -112,13 +124,14 @@ export default function ContactForm() {
                     <textarea
                         id="message"
                         name="message"
-                        className="w-full p-2 rounded"
-                        value={formData.message}
+                        className="w-full p-2 bg-sky-950 opacity-50 border-black rounded"
+                        value={formState.message}
                         onChange={handleChange}
+                        placeholder='Message'
                         required
                     ></textarea>
                 </div>
-                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button type="submit" className="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
                     Send
                 </button>
             </form>

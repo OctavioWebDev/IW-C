@@ -34,23 +34,26 @@ const HeroCarousel = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % images.length);
-    }, 4000); // Change the image every 4 seconds
+    }, 9000);
 
-    return () => clearInterval(timer); // Clear the interval on component unmount
+    return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="image-carousel -z-50 relative w-full">
-      <div className="image-item text-center px-4 py-8">
+    <div className="image-carousel relative w-full h-secreen overflow-hidden">
+      <div className="image-item px-48 py-48">
         {images.map((imageData, index) => (
-          <div key={index} className={`transition-opacity duration-700 ease-in-out ${index === currentImageIndex ? 'opacity-100' : 'opacity-0 absolute'}`} style={{ position: 'relative', width: '100%', height: '480px' }}>
+          <div key={index} className={`transition-opacity duration-9000 ease-in-out ${index === currentImageIndex ? 'opacity-100' : 'opacity-0 absolute'} absolute inset-0`}>
             <Image
               src={imageData.src}
               alt={`Display Image ${index + 1}`}
-              width={500}
-              height={500}
+              layout='fill'
+              objectFit='cover'
               quality={75}
             />
+            <div className="overlay absolute inset-0 bg-amber-700 bg-opacity-60 flex items-center justify-center">
+            <p className="tracking-tighter text-2xl md:text-3xl lg:text-7xl font-bold text-sky-50">Integrity Wall and Ceiling Of Toledo </p>
+          </div>
           </div>
         ))}
       </div>
