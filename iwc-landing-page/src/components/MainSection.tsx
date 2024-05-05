@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
-import img1 from '/public/images/Image-IWC1.jpeg';
 
 export default function MainSection() {
     return (
