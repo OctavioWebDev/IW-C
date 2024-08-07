@@ -64,7 +64,7 @@ export default function ContactForm() {
     };
 
     return (
-        <div className="bg-amber-700 p-8">
+        <div id="contact-form" className="bg-amber-700 p-8">
             <h1 className="text-white text-2xl mb-4">Contact Us</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">

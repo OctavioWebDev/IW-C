@@ -33,7 +33,7 @@ export default function Footer() {
           </p>
           <p>
             <a href="mailto:contact@iwctoledo.com">
-              <FontAwesomeIcon icon={faEnvelope} /> contact@iwctoledo.com
+              <FontAwesomeIcon icon={faEnvelope} /> icm@iwctoledo.com
             </a>
           </p>
         </div>

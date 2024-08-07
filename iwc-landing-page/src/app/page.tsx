@@ -6,6 +6,9 @@ import MainSection from '../components/MainSection';
 import ContactForm from '../components/ContactForm';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
+import AboutSection from '../components/AboutSection';
+import ServicesSection from '../components/ServicesSection';
+import CallToActionSection from '../components/CallToAction';
 
 export const runtime = 'edge';
 
@@ -14,8 +17,11 @@ export default function Home() {
     <div>
       {/* <Header /> */}
       <HeroSection />
+      <AboutSection />
+      <ServicesSection />
       <MainSection />
       <Testimonials />
+      <CallToActionSection />
       <ContactForm />
       <Footer />
     </div>
