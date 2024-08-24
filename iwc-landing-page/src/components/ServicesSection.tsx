@@ -34,22 +34,32 @@ const services = [
     {
         title: "Code Compliance and Inspection",
         description: "Thorough adherence to local building codes, ensuring all drywall work meets regulatory standards, and coordinating necessary inspections and approvals."
-    }
+    },
 ];
+
 export default function ServicesSection() {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const transitionTime = 0;
+    const slideInterval = 3000;
+    const allServices = [...services, ...services.slice(0, 2)];
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentIndex((prevIndex) => {
-                const nextIndex = prevIndex + 1;
-                return nextIndex >= services.length ? 0 : nextIndex;
-            });
-        }, 3000);
-    
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % allServices.length);
+        }, slideInterval);
+      
         return () => clearInterval(timer);
-    }, []);
-    
+      }, []);
+      
+      useEffect(() => {
+        if (currentIndex === services.length) {
+          const timer = setTimeout(() => {
+            setCurrentIndex(0);
+          }, transitionTime);
+          return () => clearTimeout(timer);
+        }
+      }, [currentIndex]);
+      
 
     return (
         <section className="bg-sky-950 p-8 border-t border-amber-700">
@@ -58,7 +68,10 @@ export default function ServicesSection() {
                 <div className="relative overflow-hidden">
                     <div 
                         className="flex transition-transform duration-500 ease-in-out"
-                        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                        style={{
+                            transform: `translateX(-${(currentIndex % services.length) * 100 / 3}%)`,
+                            transitionDuration: currentIndex === services.length ? '0ms' : `${transitionTime}ms`
+                        }}
                     >
                         {services.map((service, index) => (
                             <div key={index} className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">

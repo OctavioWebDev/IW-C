@@ -1,9 +1,12 @@
 'use client';
+
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import "leaflet/dist/leaflet.css";
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'; // Re-uses images from ~leaflet package
+import 'leaflet-defaulticon-compatibility';
 
 // Dynamically import react-leaflet components
 const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
@@ -30,6 +33,13 @@ export default function Footer() {
             <a href="tel:+14193811855">
               <FontAwesomeIcon icon={faPhone} /> +1(419)381-1855
             </a>
+          </p>
+          <p>
+          <div>
+          <h3 className="font-bold mb-2">Hours of Operation</h3>
+          <p className="">Mon - Fri: 9pm - 5pm</p>
+          <p className="">Sat & Sun: Closed</p>
+        </div>
           </p>
           <p>
             <a href="mailto:contact@iwctoledo.com">
