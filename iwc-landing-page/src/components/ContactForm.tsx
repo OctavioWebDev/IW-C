@@ -7,8 +7,7 @@ export default function ContactForm() {
     const formRef = useRef<HTMLFormElement | null>(null);
 
     useEffect(() => {
-        // Initialize EmailJS
-        emailjs.init("gXzVIl4DI-2qHQmWy");
+        emailjs.init("Fu8zh-f3eiBWjh1ye");
     }, []);
 
     const [formState, setFormState] = useState({
