@@ -10,7 +10,6 @@ import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import CallToActionSection from '../components/CallToAction';
 
-export const runtime = 'edge';
 
 export default function Home() {
   return (
