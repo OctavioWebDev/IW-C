@@ -66,7 +66,7 @@ export default function Footer() {
           <h2 className="font-semibold py-5">Contact</h2>
           <div className="flex space-x-4">
             <a href="tel:+14193811855" className="hover:text-gray-400"><FontAwesomeIcon icon={faPhone} /></a>
-            <a href="mailto:iwc@iwctoledo.com" className="hover:text-gray-400"><FontAwesomeIcon icon={faEnvelope} /></a>
+            <a href="mailto:icm@iwctoledo.com" className="hover:text-gray-400"><FontAwesomeIcon icon={faEnvelope} /></a>
             <a href="https://maps.google.com/?q=2857+Airport+Hwy,+Toledo,+Ohio" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400"><FontAwesomeIcon icon={faMapMarkerAlt} /></a>
           </div>
         </div>
