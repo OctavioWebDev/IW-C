@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import CallToActionSection from '../components/CallToAction';
+import LogoSection from '@/components/LogoSection';
 
 export const runtime = 'edge';
 
@@ -23,6 +24,7 @@ export default function Home() {
       <Testimonials />
       <CallToActionSection />
       <ContactForm />
+      <LogoSection />
       <Footer />
     </div>
   );
