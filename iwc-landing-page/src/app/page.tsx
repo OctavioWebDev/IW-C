@@ -85,9 +85,9 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <ServicesSection />
-      <PhotoGallery photos={photoData} />
       <MainSection />
       <Testimonials />
+      <PhotoGallery photos={photoData} />
       <CallToActionSection />
       <ContactForm />
       <LogoSection />
