@@ -62,14 +62,11 @@ interface PhotoGalleryProps {
 
 export default function PhotoGalleryComponent({ photos, columns = 3 }: PhotoGalleryProps) {
   return (
-    <div
-      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0"
-      style={{
-        gridTemplateColumns: `repeat(${columns}, 1fr)`,
-      }}
-    >
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
       {photos.map((photoGroup, index) => (
-        <PhotoTile key={index} photos={photoGroup} />
+        <div key={index} className={`${index > 0 ? 'hidden md:block' : ''}`}>
+          <PhotoTile photos={photoGroup} />
+        </div>
       ))}
     </div>
   )
