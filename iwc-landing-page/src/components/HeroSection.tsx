@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-// Import images
 import img1 from '/public/images/Image-IWC1.jpeg';
 import img2 from '/public/images/Image-IWC2-scaled.jpeg';
 import img3 from '/public/images/Image-IWC3.jpeg';
@@ -52,8 +51,14 @@ const HeroCarousel = () => {
               quality={75}
             />
             <div className="overlay absolute inset-0 bg-amber-700 bg-opacity-60 flex items-center justify-center">
-            <p className="tracking-tighter text-2xl md:text-3xl lg:text-7xl font-bold text-sky-50">Integrity Wall and Ceiling Of Toledo </p>
-          </div>
+            <Image
+                src={'/logo/INTEGRITY_LOGO_WHITE.svg'}
+                alt="Integrity Wall and Ceiling Of Toledo"
+                width={500}
+                height={200} 
+                className="max-w-full h-auto"
+              />          
+              </div>
           </div>
         ))}
       </div>
