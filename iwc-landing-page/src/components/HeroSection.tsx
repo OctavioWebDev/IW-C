@@ -6,7 +6,7 @@ import Image from 'next/image';
 import img1 from '/public/images/Image-IWC1.jpeg';
 import img2 from '/public/images/Image-IWC2-scaled.jpeg';
 import img3 from '/public/images/Image-IWC3.jpeg';
-import img4 from '/public/images/Image-IWC4.jpeg';
+import img4 from '/public/images/Image-IWC4.jpg';
 import img5 from '/public/images/Image-IWC5.jpeg';
 import img6 from '/public/images/Image-IWC6.jpeg';
 import img7 from '/public/images/Image-IWC7.jpeg';
@@ -50,9 +50,9 @@ const HeroCarousel = () => {
               objectFit='cover'
               quality={75}
             />
-            <div className="overlay absolute inset-0 bg-amber-700 bg-opacity-60 flex items-center justify-center">
+            <div className="overlay absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
             <Image
-                src={'/logo/INTEGRITY_LOGO_WHITE.svg'}
+                src={'/logo/f7af910b-5db7-4e3d-8a5b-8045d220b5fb.png'}
                 alt="Integrity Wall and Ceiling Of Toledo"
                 width={500}
                 height={200} 

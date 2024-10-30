@@ -14,7 +14,7 @@ export default function CallToActionSection() {
                 objectFit="cover"
                 quality={100}
             />
-            <div className="absolute inset-0 bg-amber-700 opacity-70"></div>
+            <div className="absolute inset-0 bg-gray-700 opacity-70"></div>
             <div className="relative z-10 p-12">
                 <div className="container mx-auto flex flex-col items-center justify-center space-y-6">
                     <h2 className="tracking-tighter text-4xl font-bold text-sky-50 text-center">Ready to Start Your Project?</h2>

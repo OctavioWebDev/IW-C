@@ -31,17 +31,13 @@ const services = [
         title: "Specialty Wall Systems",
         description: "Construction of specialty wall systems, including curved walls, partitions, and unique architectural features to enhance any space."
     },
-    {
-        title: "Code Compliance and Inspection",
-        description: "Thorough adherence to local building codes, ensuring all drywall work meets regulatory standards, and coordinating necessary inspections and approvals."
-    },
 ];
 
 export default function ServicesSection() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const transitionTime = 0;
-    const slideInterval = 3000;
-    const allServices = [...services, ...services.slice(0, 2)];
+    const slideInterval = 2000;
+    const allServices = [...services, ...services.slice(0, 1)];
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -67,9 +63,9 @@ export default function ServicesSection() {
                 <h2 className="tracking-tighter text-3xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-amber-50 to-sky-300">Our Services</h2>
                 <div className="relative overflow-hidden">
                     <div 
-                        className="flex transition-transform duration-500 ease-in-out"
+                        className="flex transition-transform duration-400 ease-in-out"
                         style={{
-                            transform: `translateX(-${(currentIndex % services.length) * 100 / 3}%)`,
+                            transform: `translateX(-${(currentIndex % services.length) * 100 / 1}%)`,
                             transitionDuration: currentIndex === services.length ? '0ms' : `${transitionTime}ms`
                         }}
                     >

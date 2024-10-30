@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import CallToActionSection from '../components/CallToAction';
-import LogoSection from '@/components/LogoSection';
+// import LogoSection from '@/components/LogoSection';
 import  PhotoGallery from '@/components/photo-gallery';
 
 export const runtime = 'edge';
@@ -90,7 +90,7 @@ export default function Home() {
       <PhotoGallery photos={photoData} />
       <CallToActionSection />
       <ContactForm />
-      <LogoSection />
+      {/* <LogoSection /> */}
       <Footer />
     </div>
   );

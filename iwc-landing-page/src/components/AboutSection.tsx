@@ -40,7 +40,7 @@ export default function AboutSection() {
                                     layout="fill"
                                     objectFit="cover"
                                 />
-                                <div className="absolute inset-0 bg-amber-700 opacity-60"></div>
+                                {/* <div className="absolute inset-0 bg-white opacity-50"></div> */}
                             </div>
                         </div>
                     </div>
