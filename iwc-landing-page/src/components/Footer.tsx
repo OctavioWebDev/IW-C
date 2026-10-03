@@ -4,15 +4,9 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import "leaflet/dist/leaflet.css";
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'; // Re-uses images from ~leaflet package
-import 'leaflet-defaulticon-compatibility';
 
-// Dynamically import react-leaflet components
-const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false });
-const Marker = dynamic(() => import('react-leaflet').then(mod => mod.Marker), { ssr: false });
-const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ssr: false });
+// Leaflet needs `window`, so the whole map loads only in the browser
+const FooterMap = dynamic(() => import('./FooterMap'), { ssr: false });
 
 export default function Footer() {
   // Define position as a tuple [latitude, longitude]
@@ -49,16 +43,7 @@ export default function Footer() {
         </div>
         {/* Map */}
         <div className='map-container py-5'>
-          <MapContainer center={position} zoom={13} style={{ height: '200px', width: '100%' }} scrollWheelZoom={false}>
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={position}>
-              <Popup>
-                We are here!
-              </Popup>
-            </Marker>
-          </MapContainer>
+          <FooterMap position={position} />
         </div>
 
         {/* Social Icons */}

@@ -9,6 +9,9 @@
     "lint": "next lint",
     "email": "email dev --dir src/email"
   },
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",

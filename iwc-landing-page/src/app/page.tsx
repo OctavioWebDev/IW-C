@@ -12,8 +12,6 @@ import CallToActionSection from '../components/CallToAction';
 // import LogoSection from '@/components/LogoSection';
 import  PhotoGallery from '@/components/photo-gallery';
 
-export const runtime = 'edge';
-
 interface Photo {
   id: string
   url: string
