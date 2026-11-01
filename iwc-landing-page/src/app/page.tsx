@@ -1,6 +1,3 @@
-'use client';
-
-// import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import MainSection from '../components/MainSection';
 import ContactForm from '../components/ContactForm';
@@ -9,14 +6,12 @@ import Footer from '../components/Footer';
 import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import CallToActionSection from '../components/CallToAction';
-// import LogoSection from '@/components/LogoSection';
-import  PhotoGallery from '@/components/photo-gallery';
+import PhotoGallery from '@/components/photo-gallery';
 
 interface Photo {
   id: string
   url: string
   description: string
-  date: Date
 }
 
 const photoData: Photo[][] = [
@@ -24,54 +19,46 @@ const photoData: Photo[][] = [
     {
       id: '1',
       url: '/images/Image-IWC6.jpeg',
-      description: 'Ingrity Wall and Ceiling',
-      date: new Date('2023-05-01'),
+      description: 'Integrity Wall and Ceiling',
     },
     {
       id: '2',
       url: '/images/Image-IWC5.jpeg',
-      description: 'Ingrity Wall and Ceiling',
-      date: new Date('2023-05-15'),
+      description: 'Integrity Wall and Ceiling',
     },
   ],
   [
     {
       id: '3',
-      url: '/images/Image-IWC4.jpeg',
-      description: 'Ingrity Wall and Ceiling',
-      date: new Date('2023-06-01'),
+      url: '/images/Image-IWC4.jpg',
+      description: 'Integrity Wall and Ceiling',
     },
     {
       id: '4',
       url: '/images/Image-IWC3.jpeg',
-      description: 'Ingrity Wall and Ceiling',
-      date: new Date('2023-06-15'),
+      description: 'Integrity Wall and Ceiling',
     },
   ],
   [
     {
       id: '5',
       url: '/images/Image-IWC2-scaled.jpeg',
-      description: 'Ingrity Wall and Ceiling',
-      date: new Date('2023-07-01'),
+      description: 'Integrity Wall and Ceiling',
     },
     {
       id: '6',
       url: '/images/Image-IWC1.jpeg',
-      description: 'Ingrity Wall and Ceiling',
-      date: new Date('2023-07-15'),
+      description: 'Integrity Wall and Ceiling',
     },
     {
       id: '7',
       url: '/images/Image-IWC7.jpeg',
-      description: 'Ingrity Wall and Ceiling',
-      date: new Date('2023-07-15'),
+      description: 'Integrity Wall and Ceiling',
     },
     {
       id: '8',
       url: '/images/Image-IWC8.jpeg',
-      description: 'Ingrity Wall and Ceiling',
-      date: new Date('2023-07-15'),
+      description: 'Integrity Wall and Ceiling',
     },
   ],
 ]
@@ -79,7 +66,6 @@ const photoData: Photo[][] = [
 export default function Home() {
   return (
     <div>
-      {/* <Header /> */}
       <HeroSection />
       <AboutSection />
       <ServicesSection />
@@ -88,7 +74,6 @@ export default function Home() {
       <PhotoGallery photos={photoData} />
       <CallToActionSection />
       <ContactForm />
-      {/* <LogoSection /> */}
       <Footer />
     </div>
   );

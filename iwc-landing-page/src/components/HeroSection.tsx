@@ -12,20 +12,7 @@ import img6 from '/public/images/Image-IWC6.jpeg';
 import img7 from '/public/images/Image-IWC7.jpeg';
 import img8 from '/public/images/Image-IWC8.jpeg';
 
-interface ImageData {
-  src: any;
-}
-
-const images: ImageData[] = [
-  { src: img1 },
-  { src: img2 },
-  { src: img3 },
-  { src: img4 },
-  { src: img5 },
-  { src: img6 },
-  { src: img7 },
-  { src: img8 },
-];
+const images = [img1, img2, img3, img4, img5, img6, img7, img8];
 
 const HeroCarousel = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -39,34 +26,31 @@ const HeroCarousel = () => {
   }, []);
 
   return (
-    <div className="image-carousel relative w-full h-secreen overflow-hidden">
-      <div className="image-item px-48 py-48">
-        {images.map((imageData, index) => (
-          <div key={index} className={`transition-opacity duration-9000 ease-in-out ${index === currentImageIndex ? 'opacity-100' : 'opacity-0 absolute'} absolute inset-0`}>
-            <Image
-              src={imageData.src}
-              alt={`Display Image ${index + 1}`}
-              layout='fill'
-              objectFit='cover'
-              quality={75}
-            />
-            <div className="overlay absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
-            <Image
-                src={'/logo/f7af910b-5db7-4e3d-8a5b-8045d220b5fb.png'}
-                alt="Integrity Wall and Ceiling Of Toledo"
-                width={500}
-                height={200} 
-                className="max-w-full h-auto"
-              />          
-              </div>
-          </div>
-        ))}
+    <section className="relative w-full h-[70vh] md:h-screen overflow-hidden">
+      {images.map((src, index) => (
+        <Image
+          key={index}
+          src={src}
+          alt={`Integrity Wall and Ceiling project ${index + 1}`}
+          fill
+          priority={index === 0}
+          sizes="100vw"
+          quality={75}
+          className={`object-cover transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}
+        />
+      ))}
+      <div className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center px-6">
+        <Image
+          src="/logo/f7af910b-5db7-4e3d-8a5b-8045d220b5fb.png"
+          alt="Integrity Wall and Ceiling Of Toledo"
+          width={500}
+          height={200}
+          priority
+          className="max-w-full h-auto"
+        />
       </div>
-    </div>
+    </section>
   );
 };
 
 export default HeroCarousel;
-
-
-
