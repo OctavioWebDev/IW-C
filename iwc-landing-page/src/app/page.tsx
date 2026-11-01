@@ -6,64 +6,20 @@ import Footer from '../components/Footer';
 import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import CallToActionSection from '../components/CallToAction';
+import Link from 'next/link';
 import PhotoGallery from '@/components/photo-gallery';
+import { getCachedPhotos } from '@/lib/gallery/cached';
+import type { GalleryPhoto } from '@/lib/gallery/types';
 
-interface Photo {
-  id: string
-  url: string
-  description: string
+// The home strip shows the newest photos, dealt across its three flipping tiles.
+function groupForStrip(photos: GalleryPhoto[], tiles = 3, perTile = 3): GalleryPhoto[][] {
+  const groups: GalleryPhoto[][] = Array.from({ length: tiles }, () => []);
+  photos.slice(0, tiles * perTile).forEach((photo, i) => groups[i % tiles].push(photo));
+  return groups.filter((g) => g.length > 0);
 }
 
-const photoData: Photo[][] = [
-  [
-    {
-      id: '1',
-      url: '/images/Image-IWC6.jpeg',
-      description: 'Integrity Wall and Ceiling',
-    },
-    {
-      id: '2',
-      url: '/images/Image-IWC5.jpeg',
-      description: 'Integrity Wall and Ceiling',
-    },
-  ],
-  [
-    {
-      id: '3',
-      url: '/images/Image-IWC4.jpg',
-      description: 'Integrity Wall and Ceiling',
-    },
-    {
-      id: '4',
-      url: '/images/Image-IWC3.jpeg',
-      description: 'Integrity Wall and Ceiling',
-    },
-  ],
-  [
-    {
-      id: '5',
-      url: '/images/Image-IWC2-scaled.jpeg',
-      description: 'Integrity Wall and Ceiling',
-    },
-    {
-      id: '6',
-      url: '/images/Image-IWC1.jpeg',
-      description: 'Integrity Wall and Ceiling',
-    },
-    {
-      id: '7',
-      url: '/images/Image-IWC7.jpeg',
-      description: 'Integrity Wall and Ceiling',
-    },
-    {
-      id: '8',
-      url: '/images/Image-IWC8.jpeg',
-      description: 'Integrity Wall and Ceiling',
-    },
-  ],
-]
-
-export default function Home() {
+export default async function Home() {
+  const photos = await getCachedPhotos();
   return (
     <div>
       <HeroSection />
@@ -71,7 +27,12 @@ export default function Home() {
       <ServicesSection />
       <MainSection />
       <Testimonials />
-      <PhotoGallery photos={photoData} />
+      <PhotoGallery photos={groupForStrip(photos)} />
+      <div className="bg-sky-950 py-8 text-center">
+        <Link href="/gallery" className="bg-amber-700 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded transition duration-300">
+          See All Project Photos
+        </Link>
+      </div>
       <CallToActionSection />
       <ContactForm />
       <Footer />
