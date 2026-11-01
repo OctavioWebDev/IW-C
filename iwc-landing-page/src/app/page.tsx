@@ -7,7 +7,6 @@ import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import CallToActionSection from '../components/CallToAction';
 import PhotoGallery from '@/components/photo-gallery';
-import DrywallEstimator from '@/components/DrywallEstimator';
 
 interface Photo {
   id: string
@@ -74,7 +73,6 @@ export default function Home() {
       <Testimonials />
       <PhotoGallery photos={photoData} />
       <CallToActionSection />
-      <DrywallEstimator />
       <ContactForm />
       <Footer />
     </div>

@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from 'emailjs-com';
-import { PREFILL_EVENT } from '@/lib/contact-prefill';
 
 export default function ContactForm() {
     const formRef = useRef<HTMLFormElement | null>(null);
@@ -18,16 +17,6 @@ export default function ContactForm() {
         phone: '',
         message: ''
     });
-
-    // Tools on the page (the drywall estimator) can fill in the message box.
-    useEffect(() => {
-        const onPrefill = (event: Event) => {
-            const message = (event as CustomEvent<string>).detail;
-            setFormState(prevState => ({ ...prevState, message }));
-        };
-        window.addEventListener(PREFILL_EVENT, onPrefill);
-        return () => window.removeEventListener(PREFILL_EVENT, onPrefill);
-    }, []);
 
     const [submitStatus, setSubmitStatus] = useState({
         message: '',
