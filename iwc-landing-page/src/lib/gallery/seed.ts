@@ -1,7 +1,7 @@
 import type { GalleryPhoto } from './types';
 
 // The photos that ship with the site. They show until the first change is saved
-// in the admin, after which the saved list (which starts from these) is used.
+// in the gallery admin app, after which the saved list (which starts from these) is used.
 const files = [
   'Image-IWC6.jpeg',
   'Image-IWC5.jpeg',

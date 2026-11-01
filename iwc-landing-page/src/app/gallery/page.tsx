@@ -4,6 +4,9 @@ import GalleryGrid from '@/components/GalleryGrid';
 import Footer from '@/components/Footer';
 import { getCachedPhotos } from '@/lib/gallery/cached';
 
+// Also picks up gallery changes on its own every hour (see lib/gallery/cached.ts).
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Project Gallery | Integrity Wall and Ceiling of Toledo',
   description: 'Photos of drywall, framing, ceiling and finishing work by Integrity Wall and Ceiling of Toledo.',
