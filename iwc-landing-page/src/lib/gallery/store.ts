@@ -17,7 +17,9 @@ export async function getPhotos(): Promise<GalleryPhoto[]> {
   const { blobs } = await list({ prefix: `${site.id}/index-` });
   const latest = blobs.sort((a, b) => +new Date(b.uploadedAt) - +new Date(a.uploadedAt))[0];
   if (!latest) return sortPhotos(seedPhotos);
-  const res = await fetch(latest.url, { cache: 'no-store' });
+  // Every save writes the list to a new address, so caching it by URL is safe.
+  // 'no-store' would make Next.js abort the refresh of these cached pages.
+  const res = await fetch(latest.url, { cache: 'force-cache' });
   if (!res.ok) throw new Error(`Could not read the photo list (${res.status})`);
   return sortPhotos(await res.json());
 }
