@@ -9,8 +9,8 @@ import { faPhone, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg
 const FooterMap = dynamic(() => import('./FooterMap'), { ssr: false });
 
 export default function Footer() {
-  // Define position as a tuple [latitude, longitude]
-  const position: [number, number] = [41.626884, -83.610681]; // Example position for the map (London)
+  // 2857 Airport Hwy, Toledo, OH 43609
+  const position: [number, number] = [41.62787, -83.61036];
 
   return (
     <div className="bg-sky-950 text-white p-4">
@@ -28,15 +28,13 @@ export default function Footer() {
               <FontAwesomeIcon icon={faPhone} /> +1(419)381-1855
             </a>
           </p>
-          <p>
           <div>
-          <h3 className="font-bold mb-2">Hours of Operation</h3>
-          <p className="">Mon - Fri: 9:00am - 5:00pm</p>
-          <p className="">Sat & Sun: Closed</p>
-        </div>
-          </p>
+            <h3 className="font-bold mb-2">Hours of Operation</h3>
+            <p>Mon - Fri: 9:00am - 5:00pm</p>
+            <p>Sat & Sun: Closed</p>
+          </div>
           <p>
-            <a href="mailto:contact@iwctoledo.com">
+            <a href="mailto:icm@iwctoledo.com">
               <FontAwesomeIcon icon={faEnvelope} /> icm@iwctoledo.com
             </a>
           </p>

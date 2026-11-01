@@ -33,44 +33,49 @@ const services = [
     },
 ];
 
+// Cards visible at once: 1 on phones, 2 from sm (640px), 3 from lg (1024px).
+function useCardsPerView() {
+    const [perView, setPerView] = useState(1);
+    useEffect(() => {
+        const update = () => setPerView(window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1);
+        update();
+        window.addEventListener('resize', update);
+        return () => window.removeEventListener('resize', update);
+    }, []);
+    return perView;
+}
+
 export default function ServicesSection() {
+    const perView = useCardsPerView();
+    const lastStart = services.length - perView;
     const [currentIndex, setCurrentIndex] = useState(0);
-    const transitionTime = 0;
-    const slideInterval = 2000;
-    const allServices = [...services, ...services.slice(0, 1)];
+    const [paused, setPaused] = useState(false);
 
     useEffect(() => {
+        if (paused) return;
         const timer = setInterval(() => {
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % allServices.length);
-        }, slideInterval);
-      
+            setCurrentIndex((prev) => (prev >= lastStart ? 0 : prev + 1));
+        }, 3000);
         return () => clearInterval(timer);
-      }, []);
-      
-      useEffect(() => {
-        if (currentIndex === services.length) {
-          const timer = setTimeout(() => {
-            setCurrentIndex(0);
-          }, transitionTime);
-          return () => clearTimeout(timer);
-        }
-      }, [currentIndex]);
-      
+    }, [lastStart, paused]);
+
+    const index = Math.min(currentIndex, lastStart);
 
     return (
         <section className="bg-sky-950 p-8 border-t border-amber-700">
             <div className="container mx-auto mt-10 mb-10">
                 <h2 className="tracking-tighter text-3xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-amber-50 to-sky-300">Our Services</h2>
-                <div className="relative overflow-hidden">
-                    <div 
-                        className="flex transition-transform duration-400 ease-in-out"
-                        style={{
-                            transform: `translateX(-${(currentIndex % services.length) * 100 / 1}%)`,
-                            transitionDuration: currentIndex === services.length ? '0ms' : `${transitionTime}ms`
-                        }}
+                <div
+                    className="relative overflow-hidden"
+                    onMouseEnter={() => setPaused(true)}
+                    onMouseLeave={() => setPaused(false)}
+                >
+                    <div
+                        className="flex transition-transform duration-700 ease-in-out"
+                        style={{ transform: `translateX(-${index * (100 / perView)}%)` }}
                     >
-                        {services.map((service, index) => (
-                            <div key={index} className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
+                        {services.map((service) => (
+                            <div key={service.title} className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2">
                                 <div className="bg-sky-900 p-6 shadow-lg aspect-square flex flex-col justify-center">
                                     <h3 className="text-xl text-center font-semibold mb-2 text-amber-50">{service.title}</h3>
                                     <p className="text-sky-100 text-center">{service.description}</p>
@@ -78,6 +83,17 @@ export default function ServicesSection() {
                             </div>
                         ))}
                     </div>
+                </div>
+                <div className="flex justify-center gap-2 mt-6">
+                    {Array.from({ length: lastStart + 1 }, (_, i) => (
+                        <button
+                            key={i}
+                            type="button"
+                            aria-label={`Show service ${i + 1}`}
+                            onClick={() => setCurrentIndex(i)}
+                            className={`h-2.5 w-2.5 rounded-full transition-colors ${i === index ? 'bg-amber-600' : 'bg-sky-700 hover:bg-sky-500'}`}
+                        />
+                    ))}
                 </div>
             </div>
         </section>

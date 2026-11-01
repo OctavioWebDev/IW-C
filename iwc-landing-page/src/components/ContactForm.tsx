@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from 'emailjs-com';
+import { PREFILL_EVENT } from '@/lib/contact-prefill';
 
 export default function ContactForm() {
     const formRef = useRef<HTMLFormElement | null>(null);
@@ -17,6 +18,16 @@ export default function ContactForm() {
         phone: '',
         message: ''
     });
+
+    // Tools on the page (the drywall estimator) can fill in the message box.
+    useEffect(() => {
+        const onPrefill = (event: Event) => {
+            const message = (event as CustomEvent<string>).detail;
+            setFormState(prevState => ({ ...prevState, message }));
+        };
+        window.addEventListener(PREFILL_EVENT, onPrefill);
+        return () => window.removeEventListener(PREFILL_EVENT, onPrefill);
+    }, []);
 
     const [submitStatus, setSubmitStatus] = useState({
         message: '',
@@ -64,8 +75,8 @@ export default function ContactForm() {
 
     return (
         <div id="contact-form" className="bg-amber-700 p-8">
-            <h1 className="text-white text-2xl mb-4">Contact Us</h1>
-            <form onSubmit={handleSubmit}>
+            <h2 className="text-white text-2xl mb-4">Contact Us</h2>
+            <form ref={formRef} onSubmit={handleSubmit}>
                 <div className="mb-4">
                     <label htmlFor="firstName" className="block text-white mb-2">First Name:</label>
                     <input
@@ -95,7 +106,11 @@ export default function ContactForm() {
                 <div className="mb-4">
                     <label htmlFor="phone" className="block text-white mb-2">Phone Number:</label>
                     <input
-                        type="text"
+                        type="tel"
+                        inputMode="tel"
+                        autoComplete="tel"
+                        pattern="[0-9\(\)\+\-\.\s]{7,}"
+                        title="Please enter a valid phone number"
                         id="phone"
                         name="phone"
                         className="w-full p-2 bg-sky-950 opacity-50 border-black rounded"
@@ -127,6 +142,7 @@ export default function ContactForm() {
                         value={formState.message}
                         onChange={handleChange}
                         placeholder='Message'
+                        rows={6}
                         required
                     ></textarea>
                 </div>

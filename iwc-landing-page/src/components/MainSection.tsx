@@ -15,7 +15,7 @@ export default function MainSection() {
                             alt="Integrity Wall and Ceiling"
                             width={800}
                             height={600}
-                            objectFit="cover"
+                            className="object-cover w-full h-full"
                         />
                         {/* <div className="absolute inset-0 bg-white opacity-50"></div> */}
                     </div>
@@ -26,7 +26,7 @@ export default function MainSection() {
                             For we aim at what is honorable not only in the Lord's sight but also in the sight of man.
                         </p>
                         <p className="text-sky-100 mb-4">
-                            Corinthians 8:21
+                            2 Corinthians 8:21
                         </p>
                         <p className="text-sky-100">
                             We specialize in providing high-quality solutions tailored to your needs.

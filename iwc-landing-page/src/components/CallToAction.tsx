@@ -10,8 +10,8 @@ export default function CallToActionSection() {
             <Image
                 src={backgroundImage}
                 alt="Background"
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
                 quality={100}
             />
             <div className="absolute inset-0 bg-gray-700 opacity-70"></div>

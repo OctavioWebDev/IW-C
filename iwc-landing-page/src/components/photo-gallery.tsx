@@ -1,14 +1,12 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { format } from 'date-fns'
 import Image from 'next/image'
 
 interface Photo {
   id: string
   url: string
   description: string
-  date: Date
 }
 
 interface PhotoTileProps {
@@ -41,14 +39,13 @@ const PhotoTile: React.FC<PhotoTileProps> = ({ photos, interval = 5000 }) => {
           <Image
             src={currentPhoto.url}
             alt={currentPhoto.description}
-            width={1000}
-            height={1000}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(min-width: 768px) 33vw, 100vw"
+            className="object-cover"
           />
         </div>
         <div className="absolute inset-0 backface-hidden transform rotate-y-180 bg-amber-700 bg-opacity-90 flex flex-col justify-end p-4 text-white">
-          <p className="text-sm mb-2">{currentPhoto.description}</p>
-          <p className="text-xs">{format(currentPhoto.date, 'MMMM d, yyyy')}</p>
+          <p className="text-sm">{currentPhoto.description}</p>
         </div>
       </div>
     </div>
@@ -57,10 +54,9 @@ const PhotoTile: React.FC<PhotoTileProps> = ({ photos, interval = 5000 }) => {
 
 interface PhotoGalleryProps {
   photos: Photo[][]
-  columns?: number
 }
 
-export default function PhotoGalleryComponent({ photos, columns = 3 }: PhotoGalleryProps) {
+export default function PhotoGalleryComponent({ photos }: PhotoGalleryProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
       {photos.map((photoGroup, index) => (

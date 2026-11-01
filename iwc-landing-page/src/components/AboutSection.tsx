@@ -37,8 +37,8 @@ export default function AboutSection() {
                                 <Image
                                     src={aboutImage}
                                     alt="About Integrity Wall and Ceiling"
-                                    layout="fill"
-                                    objectFit="cover"
+                                    fill
+                                    className="object-cover"
                                 />
                                 {/* <div className="absolute inset-0 bg-white opacity-50"></div> */}
                             </div>
